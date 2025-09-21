@@ -22,12 +22,12 @@ O projeto é organizado de forma modular para separar a lógica de negócio da i
 ```bash
 projeto_rbc/
 ├── data/
-│   └── car_sales_data.csv      # A base de dados utilizada
+│   └── car_sales_data.csv      
 │
-├── rbc_model.py                # Contém a classe e toda a lógica do RBC
-├── gui.py                      # Contém a classe e toda a lógica da interface gráfica
-├── main.py                     # Ponto de entrada que inicia a aplicação
-└── README.md                   # Este arquivo
+├── rbc_model.py                
+├── gui.py                      
+├── main.py                     
+└── README.md                   
 ```
 
 -----
