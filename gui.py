@@ -20,18 +20,11 @@ class RBC_GUI:
 
         main_frame = ttk.Frame(root, padding="20")
         main_frame.grid(row=0, column=0, sticky="nsew")
-
-        # Centralização Horizontal
         main_frame.grid_columnconfigure(0, weight=1)
         main_frame.grid_columnconfigure(2, weight=1)
-        
-        # --- ALTERAÇÃO 1: Centralização Vertical ---
-        # Adicionamos uma linha vazia no topo (0) e no fundo (5)
-        # para empurrar o conteúdo para o centro vertical.
         main_frame.grid_rowconfigure(0, weight=1)
         main_frame.grid_rowconfigure(5, weight=1)
 
-        # O conteúdo agora começa na linha 1
         input_frame = ttk.LabelFrame(main_frame, text="Inserir Dados do Carro", padding=10, labelanchor="n")
         input_frame.grid(row=1, column=1, sticky=(tk.W, tk.E))
         
@@ -47,7 +40,7 @@ class RBC_GUI:
             feature_en = self.model.inv_translation_map[feature_pt]
             
             if feature_pt in combobox_fields:
-                # O dropdown de Fabricante será populado, mas os outros começarão vazios
+
                 values_for_display = []
                 if feature_pt == 'Fabricante':
                     values_for_display = sorted(self.model.case_base_original[feature_en].unique().tolist())
@@ -62,19 +55,13 @@ class RBC_GUI:
         
         self.entries['Fabricante'].bind('<<ComboboxSelected>>', self.update_models)
         self.entries['Modelo'].bind('<<ComboboxSelected>>', self.update_options_for_model)
-        
-        # --- ALTERAÇÃO 2: Iniciar com campos em branco ---
-        # A linha abaixo foi comentada para que o programa não preencha os dados iniciais.
-        # self.fill_example_data()
 
         button_frame = ttk.Frame(main_frame)
-        # O botão agora fica na linha 2
         button_frame.grid(row=2, column=1, pady=10, sticky='ew')
         find_button = ttk.Button(button_frame, text="Encontrar Carros Similares e Sugerir Preço", command=self.find_similar_cases)
         find_button.pack()
 
         result_frame = ttk.LabelFrame(main_frame, text="Resultados (Carros Mais Similares)", padding=10, labelanchor="n")
-        # O frame de resultados agora fica na linha 3
         result_frame.grid(row=3, column=1, sticky=(tk.W, tk.E), pady=10)
         
         columns_to_show = self.feature_columns_pt + [self.model.solution_feature_pt]
@@ -90,12 +77,10 @@ class RBC_GUI:
         result_frame.grid_columnconfigure(0, weight=1)
 
         solution_frame = ttk.Frame(main_frame, padding="10")
-        # O frame de solução agora fica na linha 4
         solution_frame.grid(row=4, column=1, sticky='ew')
         self.solution_label = ttk.Label(solution_frame, text="Preço Sugerido:", font=("Helvetica", 12, "bold"))
         self.solution_label.pack()
 
-    # A função fill_example_data ainda existe, mas não é mais chamada no início.
     def fill_example_data(self):
         example_case = self.model.case_base_original.iloc[0]
         self.entries['Fabricante'].set(example_case['Manufacturer'])
@@ -109,7 +94,6 @@ class RBC_GUI:
         self.entries['Ano'].insert(0, example_case['Year of manufacture'])
         self.entries['Quilometragem'].insert(0, example_case['Mileage'])
 
-    # Nenhuma outra alteração é necessária nas funções restantes
     def update_models(self, event):
         manufacturer_en = self.entries['Fabricante'].get()
         models = sorted(self.model.case_base_original[self.model.case_base_original['Manufacturer'] == manufacturer_en]['Model'].unique().tolist())

@@ -4,17 +4,13 @@ from sklearn.preprocessing import MinMaxScaler
 
 class RBCModel:
     def __init__(self, data_path=r'projeto_rbc/data/car_sales_data.csv'):
-        # ... (código de diagnóstico removido para limpeza) ...
-        
-        # --- Dicionário de tradução de colunas ---
+
         self.translation_map = {
             'Manufacturer': 'Fabricante', 'Model': 'Modelo', 'Engine size': 'Motor',
             'Fuel type': 'Combustível', 'Year of manufacture': 'Ano',
             'Mileage': 'Quilometragem', 'Price': 'Preço'
         }
         self.inv_translation_map = {v: k for k, v in self.translation_map.items()}
-        
-        # --- NOVO: Dicionário para tradução dos DADOS de combustível ---
         self.fuel_translation = {'Petrol': 'Gasolina', 'Diesel': 'Diesel', 'Hybrid': 'Híbrido'}
         self.inv_fuel_translation = {v: k for k, v in self.fuel_translation.items()}
 
